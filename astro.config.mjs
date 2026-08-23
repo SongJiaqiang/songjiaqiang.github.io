@@ -31,6 +31,10 @@ export default defineConfig({
 			},
 			sidebar: [
 				{
+					label: 'IconCraft',
+					items: [{ autogenerate: { directory: 'docs/iconcraft' } }],
+				},
+				{
 					label: 'Evo',
 					items: [{ autogenerate: { directory: 'docs/evo' } }],
 				},
