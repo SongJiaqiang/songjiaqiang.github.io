@@ -9,7 +9,7 @@ export const defaultLang: Lang = 'zh-cn';
 
 export const ui = {
 	'zh-cn': {
-		siteTitle: '旅行的故事',
+		siteTitle: '宋千里的旅行故事',
 		siteSubtitle: '千里之行，始于足下',
 		navHome: '首页',
 		navBlog: '博客',
@@ -36,13 +36,13 @@ export const ui = {
 		postedOn: '发布于',
 		noPosts: '还没有文章。',
 		noApps: '还没有应用。',
-		heroLead: '人生是一场旅行。',
+		heroLead: '人生是一场旅行，我在这里写下代码、旋律和路上的故事。',
 		heroCtaBlog: '读博客',
 		heroCtaApps: '看应用',
 		aboutTitle: '关于',
 		aboutBody:
 			'我是宋千里，喜欢做应用，也喜欢把过程写下来。这个站点用来发布个人博客、介绍我做的应用，以及存放应用文档。',
-		aboutLinks: '在网上',
+		aboutLinks: '社交账号',
 		footerNote: '旅行的故事 · 千里之行，始于足下',
 		rss: 'RSS',
 		docsHubTitle: '应用文档',
@@ -52,7 +52,7 @@ export const ui = {
 		emptyEnBlog: '英文文章还在路上。下面是已有的中文文章。',
 	},
 	en: {
-		siteTitle: 'Stories of Travel',
+		siteTitle: "Qianli Song's Stories of Travel",
 		siteSubtitle: 'A thousand-mile journey begins with a step',
 		navHome: 'Home',
 		navBlog: 'Blog',
@@ -79,13 +79,13 @@ export const ui = {
 		postedOn: 'Published',
 		noPosts: 'No posts yet.',
 		noApps: 'No apps yet.',
-		heroLead: 'Life is a journey.',
+		heroLead: 'Life is a journey, I write code, melodies, and stories on the road.',
 		heroCtaBlog: 'Read the blog',
 		heroCtaApps: 'See apps',
 		aboutTitle: 'About',
 		aboutBody:
 			'I’m Qianli Song. I build apps and write down the process. This site hosts personal posts, app introductions, and app documentation.',
-		aboutLinks: 'Around the web',
+		aboutLinks: 'Social accounts',
 		footerNote: 'Stories of Travel · a thousand-mile journey begins with a step',
 		rss: 'RSS',
 		docsHubTitle: 'App docs',
