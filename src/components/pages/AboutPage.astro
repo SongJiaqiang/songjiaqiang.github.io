@@ -1,0 +1,40 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { type Lang } from '../../i18n/ui';
+import { useTranslations } from '../../i18n/utils';
+
+interface Props {
+	lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const webLinks = [
+	{ label: 'GitHub', href: 'https://github.com/SongJiaqiang' },
+	{ label: 'YouTube', href: 'https://www.youtube.com/@宋千里-sql' },
+	{ label: 'Instagram', href: 'https://www.instagram.com/song_qian_li/' },
+	{ label: 'TikTok', href: 'https://www.tiktok.com/@song.qianli' },
+	{ label: lang === 'en' ? 'Douyin' : '抖音', href: 'https://v.douyin.com/Q3Mu50Pmv5U/' },
+	{ label: 'Bilibili', href: 'https://space.bilibili.com/476824893' },
+];
+---
+
+<BaseLayout lang={lang} title={t('aboutTitle')} description={t('aboutBody')}>
+	<article class="max-w-2xl">
+		<h1 class="font-serif text-4xl">{t('aboutTitle')}</h1>
+		<p class="prose-water mt-6">{t('aboutBody')}</p>
+		<h2 class="mt-10 font-serif text-2xl">{t('aboutLinks')}</h2>
+		<ul class="mt-4 space-y-2 text-water-deep">
+			{
+				webLinks.map((link) => (
+					<li>
+						<a href={link.href} rel="noreferrer">
+							{link.label}
+						</a>
+					</li>
+				))
+			}
+		</ul>
+	</article>
+</BaseLayout>

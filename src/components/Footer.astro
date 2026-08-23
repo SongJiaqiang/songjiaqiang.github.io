@@ -1,0 +1,23 @@
+---
+import { type Lang } from '../i18n/ui';
+import { localizedPath, useTranslations } from '../i18n/utils';
+
+interface Props {
+	lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer mt-16 border-t border-ink/10 bg-paper-deep/50">
+	<div class="mx-auto flex max-w-5xl flex-col gap-3 px-5 py-8 text-sm text-ink-soft sm:flex-row sm:items-center sm:justify-between">
+		<p>{t('footerNote')} · 2020–{year}</p>
+		<div class="flex gap-4">
+			<a class="hover:text-water" href={localizedPath(lang, '/about')}>{t('navAbout')}</a>
+			<a class="hover:text-water" href={lang === 'en' ? '/en/rss.xml' : '/rss.xml'}>{t('rss')}</a>
+			<a class="hover:text-water" href="https://github.com/SongJiaqiang">GitHub</a>
+		</div>
+	</div>
+</footer>

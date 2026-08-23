@@ -1,0 +1,108 @@
+@layer base, starlight, theme, components, utilities;
+
+@import '@astrojs/starlight-tailwind';
+@import 'tailwindcss/theme.css' layer(theme);
+@import 'tailwindcss/utilities.css' layer(utilities);
+
+@theme {
+	--font-sans: 'Noto Sans SC', 'Source Han Sans SC', ui-sans-serif, system-ui, sans-serif;
+	--font-serif: 'Noto Serif SC', 'Source Han Serif SC', 'Songti SC', serif;
+	--color-ink: #14242c;
+	--color-ink-soft: #3a515b;
+	--color-paper: #f4f0e6;
+	--color-paper-deep: #e8e1d2;
+	--color-water: #1c6b78;
+	--color-water-deep: #134e58;
+	--color-foam: #dceeee;
+	--color-accent-200: #9fd4d8;
+	--color-accent-600: #1c6b78;
+	--color-gray-100: #f4f0e6;
+	--color-gray-200: #e8e1d2;
+	--color-gray-300: #cfc6b4;
+	--color-gray-400: #8a9aa2;
+	--color-gray-500: #5c717a;
+	--color-gray-600: #3a515b;
+	--color-gray-700: #243840;
+	--color-gray-800: #14242c;
+}
+
+@layer base {
+	html {
+		scroll-behavior: smooth;
+	}
+
+	body {
+		font-family: var(--font-sans);
+		color: var(--color-ink);
+		background: var(--color-paper);
+	}
+}
+
+.site-shell {
+	min-height: 100vh;
+	background:
+		radial-gradient(1200px 480px at 10% -10%, rgb(28 107 120 / 0.12), transparent 60%),
+		radial-gradient(900px 420px at 100% 0%, rgb(232 225 210 / 0.9), transparent 55%),
+		var(--color-paper);
+	color: var(--color-ink);
+}
+
+.site-header,
+.site-footer {
+	backdrop-filter: blur(10px);
+}
+
+.prose-water {
+	color: var(--color-ink-soft);
+	font-size: 1.05rem;
+	line-height: 1.85;
+}
+
+.prose-water h1,
+.prose-water h2,
+.prose-water h3,
+.prose-water h4 {
+	color: var(--color-ink);
+	font-family: var(--font-serif);
+	font-weight: 600;
+	line-height: 1.35;
+}
+
+.prose-water a {
+	color: var(--color-water-deep);
+	text-decoration: underline;
+	text-underline-offset: 3px;
+}
+
+.prose-water img {
+	border-radius: 0.75rem;
+	max-width: 100%;
+	height: auto;
+}
+
+.prose-water pre,
+.prose-water code {
+	font-size: 0.9em;
+}
+
+.prose-water pre {
+	overflow-x: auto;
+	padding: 1rem;
+	border-radius: 0.75rem;
+	background: #14242c;
+	color: #e8f4f4;
+}
+
+.prose-water :not(pre) > code {
+	background: var(--color-foam);
+	padding: 0.1em 0.35em;
+	border-radius: 0.3em;
+}
+
+/* Starlight: keep docs related, not identical */
+:root {
+	--sl-color-accent-low: #dceeee;
+	--sl-color-accent: #1c6b78;
+	--sl-color-accent-high: #134e58;
+	--sl-font: var(--font-sans);
+}

@@ -1,0 +1,32 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { useTranslations } from '../i18n/utils';
+import { appPath, docsPath } from '../lib/content';
+
+interface Props {
+	app: CollectionEntry<'apps'>;
+}
+
+const { app } = Astro.props;
+const t = useTranslations(app.data.lang);
+const statusLabel = app.data.status === 'active' ? t('statusActive') : t('statusArchived');
+---
+
+<article class="flex flex-col rounded-2xl border border-ink/10 bg-white/60 p-6">
+	<div class="flex items-start justify-between gap-3">
+		<div>
+			<p class="text-xs uppercase tracking-[0.18em] text-water">{app.data.name}</p>
+			<h3 class="mt-1 font-serif text-2xl text-ink">{app.data.tagline}</h3>
+		</div>
+		<span class="rounded-full bg-foam px-2.5 py-1 text-xs text-water-deep">{statusLabel}</span>
+	</div>
+	<p class="mt-3 flex-1 text-sm leading-relaxed text-ink-soft">{app.data.summary}</p>
+	<div class="mt-5 flex flex-wrap gap-3 text-sm">
+		<a href={appPath(app)} class="rounded-full bg-water px-4 py-1.5 text-paper hover:bg-water-deep">
+			{t('readMore')}
+		</a>
+		<a href={docsPath(app.data.docs, app.data.lang)} class="rounded-full border border-ink/15 px-4 py-1.5 hover:border-water">
+			{t('openDocs')}
+		</a>
+	</div>
+</article>

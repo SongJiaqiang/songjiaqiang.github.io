@@ -1,0 +1,25 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import AppCard from '../AppCard.astro';
+import { type Lang } from '../../i18n/ui';
+import { useTranslations } from '../../i18n/utils';
+import { getApps } from '../../lib/content';
+
+interface Props {
+	lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const apps = await getApps(lang);
+---
+
+<BaseLayout lang={lang} title={t('navApps')} description={t('heroLead')}>
+	<header class="max-w-2xl">
+		<h1 class="font-serif text-4xl">{t('navApps')}</h1>
+		<p class="mt-3 text-ink-soft">{t('docsHubLead')}</p>
+	</header>
+	<div class="mt-8 grid gap-4 md:grid-cols-2">
+		{apps.length === 0 ? <p class="text-ink-soft">{t('noApps')}</p> : apps.map((app) => <AppCard app={app} />)}
+	</div>
+</BaseLayout>
