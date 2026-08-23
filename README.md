@@ -28,6 +28,6 @@ GitHub Actions (`.github/workflows/deploy.yml`) builds the site and publishes it
 
 1. Push this **source** to `SongJiaqiang/songjiaqiang.github.io` (a `source` or `main` branch is fine).
 2. In the repo: **Settings → Pages → Source = GitHub Actions**.
-3. Custom domain `songjiaqiang.com` is set via `public/CNAME`.
+3. Custom domain `songqianli.com` is set via `public/CNAME`.
 
 Do not push generated HTML the old Hexo way. After the first deploy, rotate the old Gitalk GitHub OAuth secret if it is still active — it was stored in the former Butterfly theme config and is not used here.
