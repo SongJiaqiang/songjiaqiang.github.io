@@ -1,0 +1,63 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PostCard from '../PostCard.astro';
+import AppCard from '../AppCard.astro';
+import { type Lang } from '../../i18n/ui';
+import { localizedPath, useTranslations } from '../../i18n/utils';
+import { getApps, getPosts } from '../../lib/content';
+
+interface Props {
+	lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const posts = (await getPosts()).slice(0, 4);
+const apps = await getApps(lang);
+---
+
+<BaseLayout lang={lang}>
+	<section class="max-w-3xl py-8">
+		<p class="text-sm tracking-[0.2em] text-water uppercase">{t('siteSubtitle')}</p>
+		<h1 class="mt-3 font-serif text-4xl leading-tight text-ink sm:text-5xl">{t('siteTitle')}</h1>
+		<p class="mt-5 max-w-xl text-lg leading-relaxed text-ink-soft">{t('heroLead')}</p>
+		<div class="mt-7 flex flex-wrap gap-3">
+			<a href={localizedPath(lang, '/blog')} class="rounded-full bg-water px-5 py-2 text-paper hover:bg-water-deep">
+				{t('heroCtaBlog')}
+			</a>
+			<a href={localizedPath(lang, '/apps')} class="rounded-full border border-ink/15 px-5 py-2 hover:border-water">
+				{t('heroCtaApps')}
+			</a>
+		</div>
+	</section>
+
+	{
+		apps.length > 0 && (
+			<section class="mt-10">
+				<div class="mb-4 flex items-end justify-between">
+					<h2 class="font-serif text-2xl">{t('featuredApps')}</h2>
+					<a href={localizedPath(lang, '/apps')} class="text-sm text-water hover:underline">
+						{t('viewAllApps')}
+					</a>
+				</div>
+				<div class="grid gap-4 md:grid-cols-2">
+					{apps.map((app) => (
+						<AppCard app={app} />
+					))}
+				</div>
+			</section>
+		)
+	}
+
+	<section class="mt-14">
+		<div class="mb-4 flex items-end justify-between">
+			<h2 class="font-serif text-2xl">{t('latestPosts')}</h2>
+			<a href={localizedPath(lang, '/blog')} class="text-sm text-water hover:underline">
+				{t('allPosts')}
+			</a>
+		</div>
+		<div class="grid gap-4">
+			{posts.map((post) => <PostCard post={post} lang={lang} />)}
+		</div>
+	</section>
+</BaseLayout>

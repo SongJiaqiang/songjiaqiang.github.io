@@ -1,0 +1,26 @@
+---
+import Default from '@astrojs/starlight/components/Header.astro';
+import Header from '../Header.astro';
+import { langFromPath } from '../../i18n/utils';
+
+const lang = langFromPath(Astro.url.pathname);
+---
+
+<div class="site-docs-chrome">
+	<Header lang={lang} pathname={Astro.url.pathname} variant="docs" />
+	<div class="starlight-header-row">
+		<Default>
+			<slot />
+		</Default>
+	</div>
+</div>
+
+<style>
+	.starlight-header-row :global(.header) {
+		border-bottom: 0;
+		padding-block: 0.35rem;
+	}
+	.starlight-header-row :global(.title-wrapper) {
+		display: none;
+	}
+</style>

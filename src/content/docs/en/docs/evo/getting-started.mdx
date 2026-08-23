@@ -1,0 +1,33 @@
+---
+title: Getting started
+description: Run Evo locally.
+---
+
+Source: [SongJiaqiang/Evo](https://github.com/SongJiaqiang/Evo).
+
+## Prerequisites
+
+Install [Flutter](https://docs.flutter.dev/get-started/install). On macOS you also need the Xcode command-line tools; for Android, the Android SDK.
+
+There is a Chinese install note on the blog: [Installing Flutter](/blog/005-learning-flutter-1-install).
+
+## Clone and run
+
+```bash
+git clone https://github.com/SongJiaqiang/Evo.git
+cd Evo
+flutter pub get
+flutter run
+```
+
+If several devices are connected:
+
+```bash
+flutter run -d <deviceId>
+```
+
+A physical iOS device needs signing configured in `ios/Runner.xcworkspace`.
+
+## What to read next
+
+The home screen is a two-pane swipe built with `TabController`. The write-up is in the [Evo project post](/blog/flutter-project-evo-01) (Chinese).

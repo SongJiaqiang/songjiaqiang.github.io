@@ -1,0 +1,33 @@
+---
+title: 开始使用
+description: 在本地运行 Evo。
+---
+
+源码仓库：[SongJiaqiang/Evo](https://github.com/SongJiaqiang/Evo)。
+
+## 环境
+
+需要已安装 [Flutter](https://docs.flutter.dev/get-started/install)。macOS 上还需要 Xcode 命令行工具；Android 则需要 Android SDK。
+
+安装过程也可以参考博客：[安装 Flutter](/blog/005-learning-flutter-1-install)。
+
+## 克隆并运行
+
+```bash
+git clone https://github.com/SongJiaqiang/Evo.git
+cd Evo
+flutter pub get
+flutter run
+```
+
+如果连接了多台设备，指定设备 id：
+
+```bash
+flutter run -d <deviceId>
+```
+
+iOS 真机需要在 `ios/Runner.xcworkspace` 里配置签名。
+
+## 下一步
+
+主界面用 `TabController` 做成两屏滑动，开发记录在 [Evo 实践文章](/blog/flutter-project-evo-01) 里。
