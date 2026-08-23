@@ -26,7 +26,7 @@ npm run preview
 
 GitHub Actions (`.github/workflows/deploy.yml`) builds the site and publishes it with GitHub Pages.
 
-1. Push this **source** to `SongJiaqiang/songjiaqiang.github.io` (a `source` or `main` branch is fine).
+1. Push this **source** to `SongJiaqiang/songjiaqiang.github.io` on the `main` branch.
 2. In the repo: **Settings → Pages → Source = GitHub Actions**.
 3. Custom domain `songqianli.com` is set via `public/CNAME`.
 
