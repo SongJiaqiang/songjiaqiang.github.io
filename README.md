@@ -1,6 +1,6 @@
 # 旅行的故事
 
-Personal site for **宋千里 (Qianli Song)** — blog, app introductions, and app docs. Built with [Astro](https://astro.build) and [Starlight](https://starlight.astro.build).
+Personal site for **宋佳强 (Jiaqiang Song)** — blog, app introductions, and app docs. Built with [Astro](https://astro.build) and [Starlight](https://starlight.astro.build).
 
 - Chinese is the default locale at `/`
 - English lives under `/en/`
