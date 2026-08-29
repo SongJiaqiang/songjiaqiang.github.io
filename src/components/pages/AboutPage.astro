@@ -21,15 +21,15 @@ const webLinks = [
 ---
 
 <BaseLayout lang={lang} title={t('aboutTitle')} description={t('aboutBody')}>
-	<article class="max-w-2xl">
-		<h1 class="font-serif text-4xl">{t('aboutTitle')}</h1>
-		<p class="prose-water mt-6">{t('aboutBody')}</p>
-		<h2 class="mt-10 font-serif text-2xl">{t('aboutLinks')}</h2>
-		<ul class="mt-4 space-y-2 text-water-deep">
+	<article class="pt-8 pb-6">
+		<h1 class="text-4xl font-bold">{t('aboutTitle')}</h1>
+		<p class="app-prose mt-6">{t('aboutBody')}</p>
+		<h2 class="mt-10 text-2xl font-semibold tracking-wide">{t('aboutLinks')}</h2>
+		<ul class="mt-4 list-none space-y-2">
 			{
 				webLinks.map((link) => (
 					<li>
-						<a href={link.href} rel="noreferrer">
+						<a href={link.href} rel="noreferrer" class="underline decoration-dashed underline-offset-4 hover:text-accent">
 							{link.label}
 						</a>
 					</li>

@@ -17,26 +17,26 @@ const { Content } = await render(post);
 ---
 
 <BaseLayout lang={lang} title={post.data.title} description={post.data.description}>
-	<article class="max-w-3xl">
+	<article class="pt-8 pb-6">
 		{
 			lang === 'en' && post.data.lang === 'zh-cn' && (
-				<p class="mb-4 rounded-xl bg-foam px-4 py-2 text-sm text-water-deep">{t('chineseOnly')}</p>
+				<p class="border-accent/80 mb-6 border-s-4 ps-3 text-sm opacity-80">{t('chineseOnly')}</p>
 			)
 		}
-		<p class="text-sm text-water">
+		<p class="text-sm italic opacity-80">
 			{t('postedOn')} {formatDate(post.data.pubDate, lang)}
 		</p>
-		<h1 class="mt-2 font-serif text-4xl leading-tight">{post.data.title}</h1>
+		<h1 class="mt-2 text-4xl leading-tight font-bold">{post.data.title}</h1>
 		{
 			post.data.tags.length > 0 && (
-				<ul class="mt-4 flex flex-wrap gap-2">
+				<ul class="mt-4 flex list-none flex-wrap gap-x-3 gap-y-1 text-sm">
 					{post.data.tags.map((tag) => (
 						<li>
 							<a
 								href={localizedPath(lang, `/blog/tags/${tag}`)}
-								class="rounded-full bg-foam px-2.5 py-0.5 text-xs text-water-deep"
+								class="text-muted-foreground underline decoration-dashed underline-offset-4 hover:text-accent"
 							>
-								{tag}
+								#{tag}
 							</a>
 						</li>
 					))}
@@ -45,10 +45,10 @@ const { Content } = await render(post);
 		}
 		{
 			post.data.cover && (
-				<img src={post.data.cover} alt="" class="mt-8 w-full rounded-2xl object-cover" />
+				<img src={post.data.cover} alt="" class="border-border mt-8 w-full border object-cover" />
 			)
 		}
-		<div class="prose-water mt-8">
+		<div class="app-prose mt-8">
 			<Content />
 		</div>
 	</article>

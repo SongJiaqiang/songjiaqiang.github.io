@@ -15,29 +15,32 @@ const { lang, title, description } = Astro.props;
 const t = useTranslations(lang);
 const pageTitle = title ? `${title} · ${t('siteTitle')}` : `${t('siteTitle')} · ${t('siteSubtitle')}`;
 const pageDescription = description ?? t('heroLead');
+const rssHref = lang === 'en' ? '/en/rss.xml' : '/rss.xml';
 ---
 
 <html lang={lang === 'en' ? 'en' : 'zh-CN'}>
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="theme-color" content="#fdfdfd" />
 		<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link
-			href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600&family=Noto+Serif+SC:wght@500;600;700&display=swap"
+			href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Noto+Sans+SC:wght@400;500;600;700&display=swap"
 			rel="stylesheet"
 		/>
-		<link rel="alternate" type="application/rss+xml" title={t('siteTitle')} href={lang === 'en' ? '/en/rss.xml' : '/rss.xml'} />
+		<script is:inline src="/theme-init.js"></script>
+		<link rel="alternate" type="application/rss+xml" title={t('siteTitle')} href={rssHref} />
 		<title>{pageTitle}</title>
 		<meta name="description" content={pageDescription} />
 		<meta property="og:title" content={pageTitle} />
 		<meta property="og:description" content={pageDescription} />
 		<meta property="og:type" content="website" />
 	</head>
-	<body class="site-shell">
+	<body class="flex min-h-screen flex-col bg-background text-foreground">
 		<Header lang={lang} pathname={Astro.url.pathname} />
-		<main class="mx-auto w-full max-w-5xl px-5 py-10">
+		<main id="main-content" class="app-layout my-1 flex-1">
 			<slot />
 		</main>
 		<Footer lang={lang} />

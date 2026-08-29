@@ -15,11 +15,19 @@ const apps = await getApps(lang);
 ---
 
 <BaseLayout lang={lang} title={t('navApps')} description={t('heroLead')}>
-	<header class="max-w-2xl">
-		<h1 class="font-serif text-4xl">{t('navApps')}</h1>
-		<p class="mt-3 text-ink-soft">{t('docsHubLead')}</p>
+	<header class="border-border border-b pt-8 pb-6">
+		<h1 class="text-4xl font-bold">{t('navApps')}</h1>
+		<p class="mt-3">{t('docsHubLead')}</p>
 	</header>
-	<div class="mt-8 grid gap-4 md:grid-cols-2">
-		{apps.length === 0 ? <p class="text-ink-soft">{t('noApps')}</p> : apps.map((app) => <AppCard app={app} />)}
-	</div>
+	{
+		apps.length === 0 ? (
+			<p class="mt-8 text-muted-foreground">{t('noApps')}</p>
+		) : (
+			<ul class="list-none">
+				{apps.map((app) => (
+					<AppCard app={app} />
+				))}
+			</ul>
+		)
+	}
 </BaseLayout>

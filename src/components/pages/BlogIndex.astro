@@ -22,24 +22,24 @@ const title = tag ? `${t('tags')} · ${tag}` : t('navBlog');
 ---
 
 <BaseLayout lang={lang} title={title}>
-	<header class="max-w-2xl">
-		<h1 class="font-serif text-4xl">{t('navBlog')}</h1>
+	<header class="border-border border-b pt-8 pb-6">
+		<h1 class="text-4xl font-bold">{t('navBlog')}</h1>
 		{
 			lang === 'en' && localizedPosts.length === 0 && (
-				<p class="mt-3 text-ink-soft">{t('emptyEnBlog')}</p>
+				<p class="mt-3 text-muted-foreground">{t('emptyEnBlog')}</p>
 			)
 		}
 	</header>
 
 	{
 		tags.length > 0 && (
-			<ul class="mt-6 flex flex-wrap gap-2">
+			<ul class="mt-6 flex list-none flex-wrap gap-x-4 gap-y-2 text-sm">
 				<li>
 					<a
 						href={localizedPath(lang, '/blog')}
 						class:list={[
-							'rounded-full px-3 py-1 text-sm',
-							!tag ? 'bg-water text-paper' : 'bg-foam text-water-deep',
+							'underline decoration-dashed underline-offset-4 hover:text-accent',
+							!tag && 'text-accent',
 						]}
 					>
 						{t('allTags')}
@@ -50,11 +50,11 @@ const title = tag ? `${t('tags')} · ${tag}` : t('navBlog');
 						<a
 							href={localizedPath(lang, `/blog/tags/${item}`)}
 							class:list={[
-								'rounded-full px-3 py-1 text-sm',
-								tag === item ? 'bg-water text-paper' : 'bg-foam text-water-deep',
+								'underline decoration-dashed underline-offset-4 hover:text-accent',
+								tag === item && 'text-accent',
 							]}
 						>
-							{item}
+							#{item}
 						</a>
 					</li>
 				))}
@@ -62,7 +62,15 @@ const title = tag ? `${t('tags')} · ${tag}` : t('navBlog');
 		)
 	}
 
-	<div class="mt-8 grid gap-4">
-		{posts.length === 0 ? <p class="text-ink-soft">{t('noPosts')}</p> : posts.map((post) => <PostCard post={post} lang={lang} />)}
-	</div>
+	{
+		posts.length === 0 ? (
+			<p class="mt-8 text-muted-foreground">{t('noPosts')}</p>
+		) : (
+			<ul class="mt-4 list-none">
+				{posts.map((post) => (
+					<PostCard post={post} lang={lang} />
+				))}
+			</ul>
+		)
+	}
 </BaseLayout>

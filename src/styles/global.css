@@ -4,26 +4,89 @@
 @import 'tailwindcss/theme.css' layer(theme);
 @import 'tailwindcss/utilities.css' layer(utilities);
 
-@theme {
-	--font-sans: 'Noto Sans SC', 'Source Han Sans SC', ui-sans-serif, system-ui, sans-serif;
-	--font-serif: 'Noto Serif SC', 'Source Han Serif SC', 'Songti SC', serif;
-	--color-ink: #14242c;
-	--color-ink-soft: #3a515b;
-	--color-paper: #f4f0e6;
-	--color-paper-deep: #e8e1d2;
-	--color-water: #1c6b78;
-	--color-water-deep: #134e58;
-	--color-foam: #dceeee;
-	--color-accent-200: #9fd4d8;
-	--color-accent-600: #1c6b78;
-	--color-gray-100: #f4f0e6;
-	--color-gray-200: #e8e1d2;
-	--color-gray-300: #cfc6b4;
-	--color-gray-400: #8a9aa2;
-	--color-gray-500: #5c717a;
-	--color-gray-600: #3a515b;
-	--color-gray-700: #243840;
-	--color-gray-800: #14242c;
+@custom-variant dark (&:where([data-theme='dark'], [data-theme='dark'] *));
+
+@theme inline {
+	--font-sans: var(--font-app);
+	--font-mono: var(--font-app);
+	--color-background: var(--background);
+	--color-foreground: var(--foreground);
+	--color-accent: var(--accent);
+	--color-accent-foreground: var(--accent-foreground);
+	--color-muted: var(--muted);
+	--color-muted-foreground: var(--muted-foreground);
+	--color-border: var(--border);
+	--color-accent-200: #9ec9e6;
+	--color-accent-600: #006cac;
+	--color-gray-100: #fdfdfd;
+	--color-gray-200: #ece9e9;
+	--color-gray-300: #e6e6e6;
+	--color-gray-400: #9ca3af;
+	--color-gray-500: #6b7280;
+	--color-gray-600: #4b5563;
+	--color-gray-700: #374151;
+	--color-gray-800: #282728;
+}
+
+:root,
+[data-theme='light'] {
+	--background: #fdfdfd;
+	--foreground: #282728;
+	--accent: #006cac;
+	--accent-foreground: #ffffff;
+	--muted: #e6e6e6;
+	--muted-foreground: #6b7280;
+	--border: #ece9e9;
+	--font-app: 'IBM Plex Mono', 'Noto Sans SC', ui-monospace, monospace;
+	color-scheme: light;
+	--sl-color-accent-low: #d6eaf6;
+	--sl-color-accent: #006cac;
+	--sl-color-accent-high: #004e7c;
+	--sl-color-white: #fdfdfd;
+	--sl-color-gray-1: #282728;
+	--sl-color-gray-2: #3f3e3f;
+	--sl-color-gray-3: #6b7280;
+	--sl-color-gray-4: #9ca3af;
+	--sl-color-gray-5: #e6e6e6;
+	--sl-color-gray-6: #ece9e9;
+	--sl-color-black: #fdfdfd;
+	--sl-color-bg: #fdfdfd;
+	--sl-color-bg-nav: #fdfdfd;
+	--sl-color-bg-sidebar: #fdfdfd;
+	--sl-color-bg-inline-code: #e6e6e6;
+	--sl-color-hairline: #ece9e9;
+	--sl-color-text: #282728;
+	--sl-color-text-accent: #006cac;
+	--sl-font: var(--font-app);
+}
+
+[data-theme='dark'] {
+	--background: #212737;
+	--foreground: #eaedf3;
+	--accent: #ff6b01;
+	--accent-foreground: #ffffff;
+	--muted: #343f60;
+	--muted-foreground: #afb9ca;
+	--border: #3d4a6b;
+	color-scheme: dark;
+	--sl-color-accent-low: #3d2a1c;
+	--sl-color-accent: #ff6b01;
+	--sl-color-accent-high: #ffb07a;
+	--sl-color-white: #eaedf3;
+	--sl-color-gray-1: #eaedf3;
+	--sl-color-gray-2: #c5cddc;
+	--sl-color-gray-3: #afb9ca;
+	--sl-color-gray-4: #6b7894;
+	--sl-color-gray-5: #343f60;
+	--sl-color-gray-6: #2a3348;
+	--sl-color-black: #212737;
+	--sl-color-bg: #212737;
+	--sl-color-bg-nav: #212737;
+	--sl-color-bg-sidebar: #1c2230;
+	--sl-color-bg-inline-code: #343f60;
+	--sl-color-hairline: #343f60;
+	--sl-color-text: #eaedf3;
+	--sl-color-text-accent: #ff6b01;
 }
 
 @layer base {
@@ -31,78 +94,168 @@
 		scroll-behavior: smooth;
 	}
 
+	* {
+		border-color: var(--border);
+		scrollbar-color: var(--muted) transparent;
+	}
+
 	body {
-		font-family: var(--font-sans);
-		color: var(--color-ink);
-		background: var(--color-paper);
+		font-family: var(--font-app);
+		color: var(--foreground);
+		background: var(--background);
+	}
+
+	a {
+		color: inherit;
+		text-decoration: none;
+	}
+
+	a,
+	button,
+	#main-content {
+		outline-color: var(--accent);
+		outline-offset: 1px;
+	}
+
+	a:focus-visible,
+	button:focus-visible,
+	#main-content:focus-visible {
+		outline: 2px dashed var(--accent);
+		text-decoration: none;
+	}
+
+	button:not(:disabled),
+	[role='button']:not(:disabled) {
+		cursor: pointer;
+	}
+
+	nav ul {
+		list-style: none;
+		padding: 0;
 	}
 }
 
-.site-shell {
-	min-height: 100vh;
-	background:
-		radial-gradient(1200px 480px at 10% -10%, rgb(28 107 120 / 0.12), transparent 60%),
-		radial-gradient(900px 420px at 100% 0%, rgb(232 225 210 / 0.9), transparent 55%),
-		var(--color-paper);
-	color: var(--color-ink);
+@utility max-w-app {
+	max-width: 48rem;
 }
 
-.site-header,
-.site-footer {
-	backdrop-filter: blur(10px);
+@utility app-layout {
+	width: 100%;
+	max-width: 48rem;
+	margin-inline: auto;
+	padding-inline: 1rem;
 }
 
-.prose-water {
-	color: var(--color-ink-soft);
-	font-size: 1.05rem;
+@utility active-nav {
+	text-decoration: underline;
+	text-decoration-style: wavy;
+	text-decoration-thickness: 2px;
+	text-underline-offset: 8px;
+}
+
+.app-prose {
+	color: var(--foreground);
+	font-size: 1rem;
 	line-height: 1.85;
 }
 
-.prose-water h1,
-.prose-water h2,
-.prose-water h3,
-.prose-water h4 {
-	color: var(--color-ink);
-	font-family: var(--font-serif);
+.app-prose h1,
+.app-prose h2,
+.app-prose h3,
+.app-prose h4 {
+	color: var(--foreground);
 	font-weight: 600;
 	line-height: 1.35;
+	margin-bottom: 0.75rem;
 }
 
-.prose-water a {
-	color: var(--color-water-deep);
+.app-prose h1 {
+	font-size: 1.875rem;
+}
+
+.app-prose h2 {
+	font-size: 1.5rem;
+	margin-top: 2rem;
+}
+
+.app-prose h3 {
+	font-size: 1.25rem;
+	font-style: italic;
+	margin-top: 1.5rem;
+}
+
+.app-prose p,
+.app-prose ul,
+.app-prose ol {
+	margin-block: 0.85rem;
+}
+
+.app-prose a {
+	color: var(--foreground);
 	text-decoration: underline;
-	text-underline-offset: 3px;
+	text-decoration-style: dashed;
+	text-underline-offset: 4px;
 }
 
-.prose-water img {
-	border-radius: 0.75rem;
+.app-prose a:hover {
+	color: var(--accent);
+}
+
+.app-prose ul,
+.app-prose ol {
+	padding-inline-start: 1.25rem;
+}
+
+.app-prose ul {
+	list-style: disc;
+}
+
+.app-prose ol {
+	list-style: decimal;
+}
+
+.app-prose li::marker {
+	color: var(--accent);
+}
+
+.app-prose img {
+	border: 1px solid var(--border);
 	max-width: 100%;
 	height: auto;
+	margin-inline: auto;
 }
 
-.prose-water pre,
-.prose-water code {
+.app-prose pre,
+.app-prose code {
 	font-size: 0.9em;
+	font-family: var(--font-app);
 }
 
-.prose-water pre {
+.app-prose pre {
 	overflow-x: auto;
 	padding: 1rem;
-	border-radius: 0.75rem;
-	background: #14242c;
-	color: #e8f4f4;
+	border: 1px solid var(--border);
+	background: var(--muted);
+	color: var(--foreground);
 }
 
-.prose-water :not(pre) > code {
-	background: var(--color-foam);
+.app-prose :not(pre) > code {
+	background: color-mix(in srgb, var(--muted) 75%, transparent);
 	padding: 0.1em 0.35em;
-	border-radius: 0.3em;
+	border-radius: 0.2em;
 }
 
-/* Starlight: keep docs related, not identical */
-:root {
-	--sl-color-accent-low: #dceeee;
-	--sl-color-accent: #1c6b78;
-	--sl-color-accent-high: #134e58;
-	--sl-font: var(--font-sans);
+.app-prose blockquote {
+	border-inline-start: 4px solid color-mix(in srgb, var(--accent) 80%, transparent);
+	padding-inline-start: 1rem;
+	opacity: 0.8;
+}
+
+.app-prose hr {
+	border-color: var(--border);
+	margin-block: 2rem;
+}
+
+.site-docs-chrome starlight-theme-select {
+	display: none;
 }

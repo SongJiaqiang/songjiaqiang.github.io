@@ -14,50 +14,80 @@ const { lang } = Astro.props;
 const t = useTranslations(lang);
 const posts = (await getPosts()).slice(0, 4);
 const apps = await getApps(lang);
+const rssHref = lang === 'en' ? '/en/rss.xml' : '/rss.xml';
 ---
 
 <BaseLayout lang={lang}>
-	<section class="max-w-3xl py-8">
-		<p class="text-sm tracking-[0.2em] text-water uppercase">{t('siteSubtitle')}</p>
-		<h1 class="mt-3 font-serif text-4xl leading-tight text-ink sm:text-5xl">{t('siteTitle')}</h1>
-		<p class="mt-5 max-w-xl text-lg leading-relaxed text-ink-soft">{t('heroLead')}</p>
-		<div class="mt-7 flex flex-wrap gap-3">
-			<a href={localizedPath(lang, '/blog')} class="rounded-full bg-water px-5 py-2 text-paper hover:bg-water-deep">
+	<section id="hero" class="border-border border-b pt-8 pb-6">
+		<h1 class="my-4 inline-block text-4xl font-bold sm:my-8 sm:text-5xl">{t('brandName')}</h1>
+		<a target="_blank" href={rssHref} class="ms-2 inline-block align-middle text-accent" title="RSS" aria-label="RSS">
+			<svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true" class="stroke-accent stroke-2">
+				<path d="M4 11a9 9 0 0 1 9 9" stroke-linecap="round"></path>
+				<path d="M4 4a16 16 0 0 1 16 16" stroke-linecap="round"></path>
+				<circle cx="5" cy="19" r="1.5" fill="currentColor" stroke="none"></circle>
+			</svg>
+		</a>
+		<p>{t('heroLead')}</p>
+		<p class="mt-2">
+			<a
+				href={localizedPath(lang, '/blog')}
+				class="underline decoration-dashed underline-offset-4 hover:text-accent"
+			>
 				{t('heroCtaBlog')}
 			</a>
-			<a href={localizedPath(lang, '/apps')} class="rounded-full border border-ink/15 px-5 py-2 hover:border-water">
+			{' · '}
+			<a
+				href={localizedPath(lang, '/apps')}
+				class="underline decoration-dashed underline-offset-4 hover:text-accent"
+			>
 				{t('heroCtaApps')}
 			</a>
+		</p>
+		<div class="mt-4 flex max-sm:flex-col sm:items-center">
+			<div class="me-2 mb-1 whitespace-nowrap sm:mb-0">{t('socialLinks')}:</div>
+			<div class="flex flex-wrap gap-x-4 gap-y-1">
+				<a class="underline decoration-dashed underline-offset-4 hover:text-accent" href="https://github.com/SongJiaqiang">
+					GitHub
+				</a>
+				<a
+					class="underline decoration-dashed underline-offset-4 hover:text-accent"
+					href="https://www.youtube.com/@宋千里-sql"
+				>
+					YouTube
+				</a>
+				<a class="underline decoration-dashed underline-offset-4 hover:text-accent" href={localizedPath(lang, '/about')}>
+					{t('navAbout')}
+				</a>
+			</div>
 		</div>
 	</section>
 
 	{
 		apps.length > 0 && (
-			<section class="mt-10">
-				<div class="mb-4 flex items-end justify-between">
-					<h2 class="font-serif text-2xl">{t('featuredApps')}</h2>
-					<a href={localizedPath(lang, '/apps')} class="text-sm text-water hover:underline">
-						{t('viewAllApps')}
-					</a>
-				</div>
-				<div class="grid gap-4 md:grid-cols-2">
+			<section id="apps" class="border-border border-b pt-12 pb-6">
+				<h2 class="text-2xl font-semibold tracking-wide">{t('featuredApps')}</h2>
+				<ul class="list-none">
 					{apps.map((app) => (
 						<AppCard app={app} />
 					))}
-				</div>
+				</ul>
 			</section>
 		)
 	}
 
-	<section class="mt-14">
-		<div class="mb-4 flex items-end justify-between">
-			<h2 class="font-serif text-2xl">{t('latestPosts')}</h2>
-			<a href={localizedPath(lang, '/blog')} class="text-sm text-water hover:underline">
-				{t('allPosts')}
-			</a>
-		</div>
-		<div class="grid gap-4">
-			{posts.map((post) => <PostCard post={post} lang={lang} />)}
-		</div>
+	<section id="recent-posts" class="pt-12 pb-6">
+		<h2 class="text-2xl font-semibold tracking-wide">{t('latestPosts')}</h2>
+		<ul class="list-none">
+			{posts.map((post) => (
+				<PostCard post={post} lang={lang} />
+			))}
+		</ul>
 	</section>
+
+	<div class="my-8 text-center">
+		<a href={localizedPath(lang, '/blog')} class="hover:text-accent">
+			{t('allPosts')}
+			<span aria-hidden="true"> →</span>
+		</a>
+	</div>
 </BaseLayout>

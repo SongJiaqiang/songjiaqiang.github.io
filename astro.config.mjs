@@ -42,6 +42,13 @@ export default defineConfig({
 			customCss: ['./src/styles/global.css'],
 			head: [
 				{
+					tag: 'meta',
+					attrs: {
+						name: 'theme-color',
+						content: '#fdfdfd',
+					},
+				},
+				{
 					tag: 'link',
 					attrs: {
 						rel: 'preconnect',
@@ -60,12 +67,19 @@ export default defineConfig({
 					tag: 'link',
 					attrs: {
 						rel: 'stylesheet',
-						href: 'https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600&family=Noto+Serif+SC:wght@500;600;700&display=swap',
+						href: 'https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Noto+Sans+SC:wght@400;500;600;700&display=swap',
+					},
+				},
+				{
+					tag: 'script',
+					attrs: {
+						src: '/theme-init.js',
 					},
 				},
 			],
 			components: {
 				Header: './src/components/starlight/Header.astro',
+				ThemeSelect: './src/components/starlight/ThemeSelect.astro',
 			},
 		}),
 		sitemap(),
