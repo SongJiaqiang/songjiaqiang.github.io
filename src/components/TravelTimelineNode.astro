@@ -1,0 +1,24 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { type Lang } from '../i18n/ui';
+import { entrySlug, formatDay } from '../lib/content';
+
+interface Props {
+	post: CollectionEntry<'travel'>;
+	lang: Lang;
+}
+
+const { post, lang } = Astro.props;
+const slug = entrySlug(post.id);
+---
+
+<button
+	type="button"
+	data-seek={slug}
+	class="flex min-w-20 appearance-none flex-col items-center border-0 bg-transparent px-1 text-center font-[inherit] hover:text-accent"
+>
+	<span class="border-accent bg-background size-3 rounded-full border-2" aria-hidden="true"></span>
+	<span class="mt-2 text-xs whitespace-nowrap">{formatDay(post.data.date, lang)}</span>
+	<span class="text-muted-foreground mt-1 max-w-24 truncate text-[11px]">{post.data.location}</span>
+	<span class="sr-only">{post.data.title}</span>
+</button>

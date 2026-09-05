@@ -1,0 +1,16 @@
+---
+import TravelPost from '../../../components/pages/TravelPost.astro';
+import { getTravelPosts, entrySlug } from '../../../lib/content';
+
+export async function getStaticPaths() {
+	const posts = await getTravelPosts();
+	return posts.map((post) => ({
+		params: { slug: entrySlug(post.id) },
+		props: { post },
+	}));
+}
+
+const { post } = Astro.props;
+---
+
+<TravelPost lang="en" post={post} />

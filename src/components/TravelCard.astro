@@ -1,0 +1,25 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { type Lang } from '../i18n/ui';
+import { entrySlug, travelPath } from '../lib/content';
+
+interface Props {
+	post: CollectionEntry<'travel'>;
+	lang: Lang;
+}
+
+const { post, lang } = Astro.props;
+const slug = entrySlug(post.id);
+---
+
+<li id={`journey-${slug}`} class="scroll-mt-24">
+	<a href={travelPath(post, lang)} class="group block">
+		<img
+			src={post.data.cover}
+			alt=""
+			class="border-border aspect-[4/3] w-full border object-cover"
+		/>
+		<p class="mt-3 text-sm text-muted-foreground">{post.data.location}</p>
+		<h3 class="mt-1 text-lg font-medium group-hover:text-accent">{post.data.title}</h3>
+	</a>
+</li>

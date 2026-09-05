@@ -1,0 +1,49 @@
+---
+import { render } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import TravelGallery from '../TravelGallery.astro';
+import { type Lang } from '../../i18n/ui';
+import { localizedPath, useTranslations } from '../../i18n/utils';
+import { formatDate } from '../../lib/content';
+
+interface Props {
+	lang: Lang;
+	post: CollectionEntry<'travel'>;
+}
+
+const { lang, post } = Astro.props;
+const t = useTranslations(lang);
+const { Content } = await render(post);
+---
+
+<BaseLayout lang={lang} title={post.data.title} description={post.data.description}>
+	<article class="pt-8 pb-6">
+		{
+			lang === 'en' && post.data.lang === 'zh-cn' && (
+				<p class="border-accent/80 mb-6 border-s-4 ps-3 text-sm opacity-80">{t('chineseOnly')}</p>
+			)
+		}
+		<p class="text-sm italic opacity-80">
+			{post.data.location} · {t('traveledOn')} {formatDate(post.data.date, lang)}
+		</p>
+		<h1 class="mt-2 text-4xl leading-tight font-bold">{post.data.title}</h1>
+		<img
+			src={post.data.cover}
+			alt=""
+			class="border-border mt-8 w-full border object-cover"
+		/>
+		<TravelGallery photos={post.data.photos} videos={post.data.videos} title={post.data.title} />
+		<div class="app-prose mt-8">
+			<Content />
+		</div>
+		<p class="mt-10">
+			<a
+				href={localizedPath(lang, '/travel')}
+				class="underline decoration-dashed underline-offset-4 hover:text-accent"
+			>
+				← {t('backToTravel')}
+			</a>
+		</p>
+	</article>
+</BaseLayout>

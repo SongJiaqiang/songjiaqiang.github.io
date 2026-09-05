@@ -19,6 +19,21 @@ const blog = defineCollection({
 	}),
 });
 
+const travel = defineCollection({
+	loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/travel' }),
+	schema: z.object({
+		title: z.string(),
+		description: z.string(),
+		location: z.string(),
+		date: z.coerce.date(),
+		cover: z.string(),
+		photos: z.array(z.string()).default([]),
+		videos: z.array(z.string()).default([]),
+		draft: z.boolean().default(false),
+		lang,
+	}),
+});
+
 const apps = defineCollection({
 	loader: glob({ pattern: '**/*.md', base: './src/content/apps' }),
 	schema: z.object({
@@ -46,4 +61,5 @@ export const collections = {
 	docs: defineCollection({ loader: docsLoader(), schema: docsSchema() }),
 	blog,
 	apps,
+	travel,
 };

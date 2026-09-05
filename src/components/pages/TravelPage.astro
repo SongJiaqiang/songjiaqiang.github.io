@@ -1,0 +1,57 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import TravelCard from '../TravelCard.astro';
+import TravelTimeline from '../TravelTimeline.astro';
+import { type Lang } from '../../i18n/ui';
+import { useTranslations } from '../../i18n/utils';
+import { getTravelPosts, groupTravelByYear } from '../../lib/content';
+
+interface Props {
+	lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const allPosts = await getTravelPosts();
+const localizedPosts = allPosts.filter((post) => post.data.lang === lang);
+const posts = localizedPosts.length > 0 ? localizedPosts : allPosts;
+const years = groupTravelByYear(posts);
+---
+
+<BaseLayout lang={lang} title={t('navTravel')}>
+	<header class="border-border border-b pt-8 pb-6">
+		<h1 class="text-4xl font-bold">{t('navTravel')}</h1>
+		{
+			lang === 'en' && localizedPosts.length === 0 && posts.length > 0 && (
+				<p class="mt-3 text-muted-foreground">{t('emptyEnTravel')}</p>
+			)
+		}
+	</header>
+
+	{
+		posts.length === 0 ? (
+			<p class="mt-8 text-muted-foreground">{t('noTravel')}</p>
+		) : (
+			years.map(({ year, posts: yearPosts }) => (
+				<section class="border-border border-b py-10 last:border-b-0" aria-labelledby={`year-${year}`}>
+					<h2 id={`year-${year}`} class="text-2xl font-semibold tracking-wide">
+						{year}
+					</h2>
+					<TravelTimeline year={year} posts={yearPosts} lang={lang} />
+					<ul class="mt-8 grid list-none grid-cols-1 gap-6 sm:grid-cols-2">
+						{yearPosts.map((post) => (
+							<TravelCard post={post} lang={lang} />
+						))}
+					</ul>
+				</section>
+			))
+		)
+	}
+</BaseLayout>
+
+<style>
+	:global(.travel-card-active) {
+		outline: 2px dashed var(--accent);
+		outline-offset: 4px;
+	}
+</style>

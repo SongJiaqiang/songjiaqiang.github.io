@@ -1,0 +1,60 @@
+---
+import { bilibiliId, isDirectVideo, youtubeId } from '../lib/content';
+
+interface Props {
+	photos: string[];
+	videos: string[];
+	title: string;
+}
+
+const { photos, videos, title } = Astro.props;
+
+type VideoEmbed =
+	| { kind: 'youtube'; id: string }
+	| { kind: 'bilibili'; id: string }
+	| { kind: 'file'; url: string };
+
+function videoEmbed(url: string): VideoEmbed {
+	const yt = youtubeId(url);
+	if (yt) return { kind: 'youtube', id: yt };
+	const bv = bilibiliId(url);
+	if (bv) return { kind: 'bilibili', id: bv };
+	return { kind: 'file', url };
+}
+
+const embeds = videos.map(videoEmbed);
+---
+
+{
+	(photos.length > 0 || embeds.length > 0) && (
+		<div class="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2">
+			{embeds.map((embed) => (
+				<div class="border-border aspect-video border sm:col-span-2">
+					{embed.kind === 'youtube' ? (
+						<iframe
+							src={`https://www.youtube-nocookie.com/embed/${embed.id}`}
+							title={title}
+							class="h-full w-full"
+							allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+							allowfullscreen
+						/>
+					) : embed.kind === 'bilibili' ? (
+						<iframe
+							src={`https://player.bilibili.com/player.html?bvid=${embed.id}&high_quality=1`}
+							title={title}
+							class="h-full w-full"
+							allowfullscreen
+						/>
+					) : isDirectVideo(embed.url) ? (
+						<video src={embed.url} class="h-full w-full object-cover" controls playsinline />
+					) : (
+						<iframe src={embed.url} title={title} class="h-full w-full" allowfullscreen />
+					)}
+				</div>
+			))}
+			{photos.map((photo) => (
+				<img src={photo} alt="" class="border-border aspect-[4/3] w-full border object-cover" />
+			))}
+		</div>
+	)
+}

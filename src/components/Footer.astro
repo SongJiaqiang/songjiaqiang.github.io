@@ -15,6 +15,7 @@ const rssHref = lang === 'en' ? '/en/rss.xml' : '/rss.xml';
 <footer class="app-layout mt-auto">
 	<div class="border-border flex flex-col items-center justify-between border-t py-6 sm:flex-row-reverse sm:py-4">
 		<div class="flex gap-4 text-sm">
+			<a class="hover:text-accent" href={localizedPath(lang, '/travel')}>{t('navTravel')}</a>
 			<a class="hover:text-accent" href={localizedPath(lang, '/about')}>{t('navAbout')}</a>
 			<a class="hover:text-accent" href={rssHref}>{t('rss')}</a>
 			<a class="hover:text-accent" href="https://github.com/SongJiaqiang">GitHub</a>

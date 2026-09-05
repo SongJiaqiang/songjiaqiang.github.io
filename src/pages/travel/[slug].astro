@@ -1,0 +1,18 @@
+---
+import TravelPost from '../../components/pages/TravelPost.astro';
+import { getTravelPosts, entrySlug } from '../../lib/content';
+
+export async function getStaticPaths() {
+	const posts = await getTravelPosts();
+	return posts
+		.filter((post) => post.data.lang === 'zh-cn')
+		.map((post) => ({
+			params: { slug: entrySlug(post.id) },
+			props: { post },
+		}));
+}
+
+const { post } = Astro.props;
+---
+
+<TravelPost lang="zh-cn" post={post} />
