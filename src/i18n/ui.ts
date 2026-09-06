@@ -11,7 +11,6 @@ export const ui = {
 	'zh-cn': {
 		siteTitle: '宋佳强的旅行故事',
 		siteSubtitle: '千里之行，始于足下',
-		brandName: '宋佳强',
 		brandNameFull: '你好！我是宋佳强',
 		navHome: '首页',
 		navBlog: '博客',
@@ -68,7 +67,6 @@ export const ui = {
 	en: {
 		siteTitle: "Jiaqiang Song's Stories of Travel",
 		siteSubtitle: 'A thousand-mile journey begins with a step',
-		brandName: 'Jiaqiang Song',
 		brandNameFull: 'Hello! I’m Jiaqiang Song',
 		navHome: 'Home',
 		navBlog: 'Blog',
