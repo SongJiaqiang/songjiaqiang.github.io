@@ -44,6 +44,7 @@ const apps = defineCollection({
 		order: z.number(),
 		lang,
 		hero: z.string().optional(),
+		icon: z.string().optional(),
 		screenshots: z.array(z.string()).default([]),
 		docs: z.string(),
 		links: z

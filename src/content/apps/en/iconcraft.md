@@ -3,9 +3,10 @@ name: IconCraft
 tagline: Pixel-perfect iOS app icon generator and replacer for macOS
 summary: Drop in a 1024×1024 master icon, generate the full AppIcon set, and inspect pixel diffs before replacing assets. Everything runs on-device.
 status: active
-order: 0
+order: 1
 lang: en
 hero: https://raw.githubusercontent.com/SongJiaqiang/IconCraft/main/assets/preview-demo.png
+icon: https://raw.githubusercontent.com/SongJiaqiang/IconCraft/main/assets/app-icon.png
 screenshots:
   - https://raw.githubusercontent.com/SongJiaqiang/IconCraft/main/assets/app-icon.png
 docs: /docs/iconcraft/

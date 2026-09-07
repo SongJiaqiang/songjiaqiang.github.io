@@ -3,9 +3,10 @@ name: IconCraft
 tagline: macOS 上的像素级 iOS 图标生成与替换工具
 summary: 把 1024×1024 主图标拖进项目，自动生成全套 AppIcon 规格，并在替换前对比像素差异。处理全程在本机完成。
 status: active
-order: 0
+order: 1
 lang: zh-cn
 hero: https://raw.githubusercontent.com/SongJiaqiang/IconCraft/main/assets/preview-demo.png
+icon: https://raw.githubusercontent.com/SongJiaqiang/IconCraft/main/assets/app-icon.png
 screenshots:
   - https://raw.githubusercontent.com/SongJiaqiang/IconCraft/main/assets/app-icon.png
 docs: /docs/iconcraft/

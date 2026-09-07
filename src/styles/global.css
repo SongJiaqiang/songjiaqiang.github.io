@@ -256,6 +256,7 @@
 	margin-block: 2rem;
 }
 
-.site-docs-chrome starlight-theme-select {
+.site-docs-chrome starlight-theme-select,
+.site-docs-chrome starlight-lang-select {
 	display: none;
 }

@@ -1,10 +1,10 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PostCard from '../PostCard.astro';
-import AppCard from '../AppCard.astro';
+import TravelCard from '../TravelCard.astro';
 import { type Lang } from '../../i18n/ui';
 import { localizedPath, useTranslations } from '../../i18n/utils';
-import { getApps, getPosts } from '../../lib/content';
+import { appPath, getApps, getPosts, getTravelPosts } from '../../lib/content';
 
 interface Props {
 	lang: Lang;
@@ -14,6 +14,9 @@ const { lang } = Astro.props;
 const t = useTranslations(lang);
 const posts = (await getPosts()).slice(0, 4);
 const apps = await getApps(lang);
+const allTrips = await getTravelPosts();
+const localizedTrips = allTrips.filter((post) => post.data.lang === lang);
+const latestTrips = (localizedTrips.length > 0 ? localizedTrips : allTrips).slice(0, 3);
 const rssHref = lang === 'en' ? '/en/rss.xml' : '/rss.xml';
 ---
 
@@ -42,6 +45,13 @@ const rssHref = lang === 'en' ? '/en/rss.xml' : '/rss.xml';
 			>
 				{t('heroCtaApps')}
 			</a>
+			{' · '}
+			<a
+				href={localizedPath(lang, '/travel')}
+				class="underline decoration-dashed underline-offset-4 hover:text-accent"
+			>
+				{t('heroCtaTravel')}
+			</a>
 		</p>
 		<div class="mt-4 flex max-sm:flex-col sm:items-center">
 			<div class="me-2 mb-1 whitespace-nowrap sm:mb-0">{t('socialLinks')}:</div>
@@ -55,8 +65,12 @@ const rssHref = lang === 'en' ? '/en/rss.xml' : '/rss.xml';
 				>
 					YouTube
 				</a>
-				<a class="underline decoration-dashed underline-offset-4 hover:text-accent" href={localizedPath(lang, '/about')}>
-					{t('navAbout')}
+				<a
+					class="underline decoration-dashed underline-offset-4 hover:text-accent"
+					href="https://x.com/SongJiaqiang"
+					rel="noreferrer"
+				>
+					{t('twitter')}
 				</a>
 			</div>
 		</div>
@@ -68,26 +82,65 @@ const rssHref = lang === 'en' ? '/en/rss.xml' : '/rss.xml';
 				<h2 class="text-2xl font-semibold tracking-wide">{t('featuredApps')}</h2>
 				<ul class="list-none">
 					{apps.map((app) => (
-						<AppCard app={app} />
+						<li class="my-5">
+							<a href={appPath(app)} class="group block">
+								<div class="flex items-center gap-4">
+									{app.data.icon && (
+										<img
+											src={app.data.icon}
+											alt=""
+											class="border-border size-12 shrink-0 rounded-xl border object-cover sm:size-14"
+										/>
+									)}
+									<div class="flex min-w-0 items-center gap-3">
+										<h3 class="text-accent m-0 text-lg leading-none font-medium group-hover:underline group-hover:decoration-dashed group-hover:underline-offset-4">
+											{app.data.name}
+										</h3>
+										<span class="text-sm leading-none italic opacity-80">
+											{app.data.status === 'active' ? t('statusActive') : t('statusArchived')}
+										</span>
+									</div>
+								</div>
+								<p class="mt-1 ms-16 text-sm leading-snug italic opacity-80 sm:ms-[4.5rem]">
+									{app.data.tagline}
+								</p>
+							</a>
+						</li>
 					))}
 				</ul>
 			</section>
 		)
 	}
 
-	<section id="recent-posts" class="pt-12 pb-6">
+	<section id="recent-posts" class="border-border border-b pt-12 pb-6">
 		<h2 class="text-2xl font-semibold tracking-wide">{t('latestPosts')}</h2>
 		<ul class="list-none">
 			{posts.map((post) => (
 				<PostCard post={post} lang={lang} />
 			))}
 		</ul>
+		<div class="my-8 text-center">
+			<a href={localizedPath(lang, '/blog')} class="hover:text-accent">
+				{t('allPosts')}
+				<span aria-hidden="true"> →</span>
+			</a>
+		</div>
 	</section>
 
-	<div class="my-8 text-center">
-		<a href={localizedPath(lang, '/blog')} class="hover:text-accent">
-			{t('allPosts')}
-			<span aria-hidden="true"> →</span>
-		</a>
-	</div>
+	<section id="latest-trips" class="pt-12 pb-6">
+		<h2 class="text-2xl font-semibold tracking-wide">{t('latestTrips')}</h2>
+		<ul class="mt-6 flex list-none gap-4 overflow-x-auto pb-2 [&>li]:w-64 [&>li]:shrink-0 sm:[&>li]:w-auto sm:[&>li]:min-w-0 sm:[&>li]:flex-1">
+			{latestTrips.map((post) => (
+				<TravelCard post={post} lang={lang} />
+			))}
+			<li>
+				<a
+					href={localizedPath(lang, '/travel')}
+					class="group border-border flex aspect-[4/3] items-center justify-center border px-4 text-center"
+				>
+					<span class="text-lg font-medium group-hover:text-accent">{t('moreStories')}</span>
+				</a>
+			</li>
+		</ul>
+	</section>
 </BaseLayout>

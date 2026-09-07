@@ -52,6 +52,10 @@ export const ui = {
 		heroLead: '人生是一场旅行，我在这里写下代码、旋律和路上的故事。',
 		heroCtaBlog: '读博客',
 		heroCtaApps: '看应用',
+		heroCtaTravel: '看旅行',
+		latestTrips: '最近旅行',
+		moreStories: '查看更多故事',
+		twitter: '推特',
 		aboutTitle: '关于',
 		aboutBody:
 			'我是宋佳强，喜欢做应用，也喜欢把过程写下来。这个站点用来发布个人博客、介绍我做的应用，以及存放应用文档。',
@@ -108,6 +112,10 @@ export const ui = {
 		heroLead: 'Life is a journey, I write code, melodies, and stories on the road.',
 		heroCtaBlog: 'Read the blog',
 		heroCtaApps: 'See apps',
+		heroCtaTravel: 'See trips',
+		latestTrips: 'Last Trip',
+		moreStories: 'Looking for more stories',
+		twitter: 'Twitter/X',
 		aboutTitle: 'About',
 		aboutBody:
 			'I’m Jiaqiang Song. I build apps and write down the process. This site hosts personal posts, app introductions, and app documentation.',

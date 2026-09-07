@@ -3,9 +3,10 @@ name: Evo
 tagline: An ambient music player that aims to be more than a Flutter demo
 summary: A Flutter rewrite of the Swift EvoRadio app, with a Douban FM–inspired UI and a simpler playback flow.
 status: archived
-order: 1
+order: 2
 lang: en
 hero: https://tva1.sinaimg.cn/large/00831rSTgy1gdlout454uj30v90istak.jpg
+icon: https://raw.githubusercontent.com/SongJiaqiang/EvoRadio/master/EvoRadio/Resources/Assets.xcassets/AppIcon.appiconset/Icon-AppStore-1024.png
 docs: /docs/evo/
 links:
   github: https://github.com/SongJiaqiang/Evo

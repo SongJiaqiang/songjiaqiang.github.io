@@ -3,9 +3,10 @@ name: Evo
 tagline: 不只是一个 Flutter Demo 的环境音乐播放器
 summary: 从 Swift 版 EvoRadio 重写而来，界面参考豆瓣 FM，想把环境音乐的播放变得更简单。
 status: archived
-order: 1
+order: 2
 lang: zh-cn
 hero: https://tva1.sinaimg.cn/large/00831rSTgy1gdlout454uj30v90istak.jpg
+icon: https://raw.githubusercontent.com/SongJiaqiang/EvoRadio/master/EvoRadio/Resources/Assets.xcassets/AppIcon.appiconset/Icon-AppStore-1024.png
 docs: /docs/evo/
 links:
   github: https://github.com/SongJiaqiang/Evo

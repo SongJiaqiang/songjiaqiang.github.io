@@ -1,0 +1,28 @@
+---
+import Default from '@astrojs/starlight/components/PageFrame.astro';
+import Footer from '../Footer.astro';
+import { langFromPath } from '../../i18n/utils';
+
+const lang = langFromPath(Astro.url.pathname);
+---
+
+<div class="docs-shell">
+	<Default>
+		<slot />
+		<slot name="header" slot="header" />
+		<slot name="sidebar" slot="sidebar" />
+	</Default>
+	<Footer lang={lang} />
+</div>
+
+<style>
+	.docs-shell {
+		display: flex;
+		flex-direction: column;
+		min-height: 100vh;
+	}
+	.docs-shell :global(.page) {
+		flex: 1 1 auto;
+		min-height: 0;
+	}
+</style>

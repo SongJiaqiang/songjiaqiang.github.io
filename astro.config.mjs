@@ -31,6 +31,10 @@ export default defineConfig({
 			},
 			sidebar: [
 				{
+					label: 'PDF2IMG',
+					items: [{ autogenerate: { directory: 'docs/pdf2img' } }],
+				},
+				{
 					label: 'IconCraft',
 					items: [{ autogenerate: { directory: 'docs/iconcraft' } }],
 				},
@@ -80,6 +84,7 @@ export default defineConfig({
 			components: {
 				Header: './src/components/starlight/Header.astro',
 				ThemeSelect: './src/components/starlight/ThemeSelect.astro',
+				PageFrame: './src/components/starlight/PageFrame.astro',
 			},
 		}),
 		sitemap(),
