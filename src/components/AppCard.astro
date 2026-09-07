@@ -37,6 +37,27 @@ const statusLabel = app.data.status === 'active' ? t('statusActive') : t('status
 			<a href={appPath(app)} class="underline decoration-dashed underline-offset-4 hover:text-accent">
 				{t('readMore')}
 			</a>
+			{
+				app.data.links.appStore ? (
+					<a
+						href={app.data.links.appStore}
+						class="underline decoration-dashed underline-offset-4 hover:text-accent"
+						rel="noreferrer"
+					>
+						{t('appStore')}
+					</a>
+				) : (
+					app.data.links.github && (
+						<a
+							href={app.data.links.github}
+							class="underline decoration-dashed underline-offset-4 hover:text-accent"
+							rel="noreferrer"
+						>
+							GitHub
+						</a>
+					)
+				)
+			}
 			<a
 				href={docsPath(app.data.docs, app.data.lang)}
 				class="underline decoration-dashed underline-offset-4 hover:text-accent"
