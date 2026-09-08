@@ -26,6 +26,7 @@ const travel = defineCollection({
 		description: z.string(),
 		location: z.string(),
 		date: z.coerce.date(),
+		endDate: z.coerce.date().optional(),
 		cover: z.string(),
 		photos: z.array(z.string()).default([]),
 		videos: z.array(z.string()).default([]),

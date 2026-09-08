@@ -9,9 +9,10 @@ interface Props {
 	lang: Lang;
 	title?: string;
 	description?: string;
+	layout?: 'default' | 'wide';
 }
 
-const { lang, title, description } = Astro.props;
+const { lang, title, description, layout = 'default' } = Astro.props;
 const t = useTranslations(lang);
 const pageTitle = title ? `${title} · ${t('siteTitle')}` : `${t('siteTitle')} · ${t('siteSubtitle')}`;
 const pageDescription = description ?? t('heroLead');
@@ -38,11 +39,26 @@ const rssHref = lang === 'en' ? '/en/rss.xml' : '/rss.xml';
 		<meta property="og:description" content={pageDescription} />
 		<meta property="og:type" content="website" />
 	</head>
-	<body class="flex min-h-screen flex-col bg-background text-foreground">
-		<Header lang={lang} pathname={Astro.url.pathname} />
-		<main id="main-content" class="app-layout my-1 flex-1">
+	<body
+		class:list={[
+			'flex flex-col bg-background text-foreground',
+			layout === 'wide' ? 'h-[100dvh] overflow-hidden' : 'min-h-screen',
+		]}
+	>
+		<div class="shrink-0">
+			<Header lang={lang} pathname={Astro.url.pathname} />
+		</div>
+		<main
+			id="main-content"
+			class:list={[
+				'my-1 min-h-0 flex-1',
+				layout === 'wide' ? 'app-layout-wide flex flex-col overflow-hidden' : 'app-layout',
+			]}
+		>
 			<slot />
 		</main>
-		<Footer lang={lang} />
+		<div class="shrink-0">
+			<Footer lang={lang} />
+		</div>
 	</body>
 </html>
